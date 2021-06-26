@@ -26,14 +26,20 @@ namespace Misc
             var rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
             var targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
             transform.rotation = targetRotation;
+
+#if UNITY_EDITOR
+            _lastLocation = targetLocation;
+#endif
         }
 
         protected abstract Vector3 TargetLocation();
 
 #if UNITY_EDITOR
+        private Vector3 _lastLocation;
+        
         private void OnDrawGizmos()
         {
-            Gizmos.DrawLine(transform.position, TargetLocation());
+            Gizmos.DrawLine(transform.position, _lastLocation);
         }
 #endif
     }
