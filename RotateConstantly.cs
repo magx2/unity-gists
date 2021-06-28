@@ -5,6 +5,7 @@ namespace Misc
     public class RotateConstantly : MonoBehaviour
     {
         [SerializeField] private Vector3 rotationSpeed = new Vector3(1, 1, 1);
+        [SerializeField] private Space space = Space.Self;
 
         [Header("Random Directions")] [SerializeField]
         private bool randomDirectionX = true;
@@ -21,7 +22,7 @@ namespace Misc
 
         private void FixedUpdate()
         {
-            transform.Rotate(rotationSpeed* Time.fixedDeltaTime, Space.Self);
+            transform.Rotate(rotationSpeed* Time.fixedDeltaTime, space);
         }
     }
 }
