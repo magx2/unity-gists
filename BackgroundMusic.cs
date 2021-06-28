@@ -1,47 +1,49 @@
-using System;
 using UnityEngine;
 
-/// <summary>
-/// This class allows to play background music in all scenes
-/// </summary>
-[RequireComponent(typeof(AudioSource))]
-public class BackgroundMusic : Singleton<BackgroundMusic>
+namespace Misc
 {
-    [Tooltip("should start playing music when starting the object")]
-    [SerializeField] private bool playOnStart = true;
-
-    private AudioSource _audioSource;
-
-    protected override void Awake()
+    /// <summary>
+    /// This class allows to play background music in all scenes
+    /// </summary>
+    [RequireComponent(typeof(AudioSource))]
+    public class BackgroundMusic : Singleton<BackgroundMusic>
     {
-        base.Awake();
-        DontDestroyOnLoad(transform.gameObject);
-        _audioSource = GetComponent<AudioSource>();
-    }
+        [Tooltip("should start playing music when starting the object")]
+        [SerializeField] private bool playOnStart = true;
 
-    private void Start()
-    {
-        if (playOnStart) InternalPlayMusic();
-    }
+        private AudioSource _audioSource;
 
-    public static void PlayMusic()
-    {
-        Instance.InternalPlayMusic();
-    }
+        protected override void Awake()
+        {
+            base.Awake();
+            DontDestroyOnLoad(transform.gameObject);
+            _audioSource = GetComponent<AudioSource>();
+        }
+
+        private void Start()
+        {
+            if (playOnStart) InternalPlayMusic();
+        }
+
+        public static void PlayMusic()
+        {
+            Instance.InternalPlayMusic();
+        }
     
-    private void InternalPlayMusic()
-    {
-        if (_audioSource.isPlaying) return;
-        _audioSource.Play();
-    }
+        private void InternalPlayMusic()
+        {
+            if (_audioSource.isPlaying) return;
+            _audioSource.Play();
+        }
 
-    public static void StopMusic()
-    {
-        Instance.InternalStopMusic();
-    }
+        public static void StopMusic()
+        {
+            Instance.InternalStopMusic();
+        }
 
-    private void InternalStopMusic()
-    {
-        _audioSource.Stop();
+        private void InternalStopMusic()
+        {
+            _audioSource.Stop();
+        }
     }
 }

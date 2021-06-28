@@ -1,32 +1,35 @@
 using UnityEngine;
 
-public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
+namespace Misc
 {
-    protected static T Instance { get; private set; }
-
-    protected virtual void Awake()
+    public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        if (Instance == null)
+        protected static T Instance { get; private set; }
+
+        protected virtual void Awake()
         {
-            Instance = (T) this;
-        }
-        else
-        {
+            if (Instance == null)
+            {
+                Instance = (T) this;
+            }
+            else
+            {
 #if UNITY_EDITOR
-            Debug.LogError($"Instance of [{name}] already exists!");
+                Debug.LogError($"Instance of [{name}] already exists!");
 #endif
+            }
         }
-    }
 
-    protected void OnDestroy()
-    {
-        if (Instance != this) return;
-        OnDestroySingleton();
-        Instance = null;
-    }
+        protected void OnDestroy()
+        {
+            if (Instance != this) return;
+            OnDestroySingleton();
+            Instance = null;
+        }
 
-    protected virtual void OnDestroySingleton()
-    {
+        protected virtual void OnDestroySingleton()
+        {
             
+        }
     }
 }
