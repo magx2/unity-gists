@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Misc
 {
@@ -9,7 +9,21 @@ namespace Misc
 
         private void Start()
         {
-            Destroy(gameObject, ttl);
+            Invoke(nameof(DestroySelf), ttl);
+        }
+
+        private void DestroySelf()
+        {
+            if (OnDestroySelf()) Destroy(gameObject);
+        }
+
+        /// <summary>
+        /// This method will be invoked before destroying object
+        /// </summary>
+        /// <returns>true if game object should be destroyed; false otherwise</returns>
+        protected virtual bool OnDestroySelf()
+        {
+            return true;
         }
     }
 }
