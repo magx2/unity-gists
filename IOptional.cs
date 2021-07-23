@@ -14,6 +14,7 @@ namespace Misc
 
         IOptional<TOut> Map<TOut>(Func<T, TOut> mapper);
 
+        void IfPresent(Action<T> action);
     }
 
     public class Something<T> : IOptional<T>
@@ -55,6 +56,11 @@ namespace Misc
         {
             return new Something<TOut>(mapper.Invoke(_value));
         }
+
+        public void IfPresent(Action<T> action)
+        {
+            action.Invoke(_value);
+        }
     }
 
     public class Nothing<T> : IOptional<T>
@@ -91,6 +97,11 @@ namespace Misc
         public IOptional<TOut> Map<TOut>(Func<T, TOut> mapper)
         {
             return new Nothing<TOut>();
+        }
+
+        public void IfPresent(Action<T> action)
+        {
+            // do nothing
         }
     }
 }
