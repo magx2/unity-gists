@@ -1,13 +1,15 @@
-using System;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Misc
 {
     public class FpsCounter : Singleton<FpsCounter>
     {
-        public static float Fps => Instance._fps;
-        private float _fps;
         private float _deltaTime;
+        private float _fps;
+
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        public static float Fps => Instance._fps;
 
         private void Update()
         {
