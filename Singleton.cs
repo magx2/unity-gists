@@ -15,7 +15,7 @@ namespace Misc
             else
             {
 #if UNITY_EDITOR
-                Debug.LogError($"Instance of [{name}] already exists!");
+                Debug.LogError($"Instance of [{name}] already exists!", gameObject);
 #endif
             }
         }
