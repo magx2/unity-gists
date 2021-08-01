@@ -3,24 +3,23 @@ using UnityEngine;
 namespace Misc
 {
     /// <summary>
-    /// This class allows to play background music in all scenes
+    ///     This class allows to play background music in all scenes
     /// </summary>
     [RequireComponent(typeof(AudioSource))]
-    public class BackgroundMusic : Singleton<BackgroundMusic>
+    public class BackgroundMusic : ImmortalSingleton<BackgroundMusic>
     {
-        [Tooltip("should start playing music when starting the object")]
-        [SerializeField] private bool playOnStart = true;
+        [Tooltip("should start playing music when starting the object")] [SerializeField]
+        private bool playOnStart = true;
 
-        private AudioSource _audioSource;
+        protected AudioSource AudioSource { get; private set; }
 
         protected override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(transform.gameObject);
-            _audioSource = GetComponent<AudioSource>();
+            AudioSource = GetComponent<AudioSource>();
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             if (playOnStart) InternalPlayMusic();
         }
@@ -29,11 +28,11 @@ namespace Misc
         {
             Instance.InternalPlayMusic();
         }
-    
+
         private void InternalPlayMusic()
         {
-            if (_audioSource.isPlaying) return;
-            _audioSource.Play();
+            if (AudioSource.isPlaying) return;
+            AudioSource.Play();
         }
 
         public static void StopMusic()
@@ -43,7 +42,7 @@ namespace Misc
 
         private void InternalStopMusic()
         {
-            _audioSource.Stop();
+            AudioSource.Stop();
         }
     }
 }
