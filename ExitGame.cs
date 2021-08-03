@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using UnityEditor;
+// for not UNITY_EDITOR
+// ReSharper disable once RedundantUsingDirective
 using UnityEngine;
 
 namespace Misc
@@ -11,7 +13,7 @@ namespace Misc
         {
             Instance.Exit();
         }
-        
+
         [SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Used in Unity")]
         public void Exit()
         {
