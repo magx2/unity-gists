@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Misc
 {
     /// <summary>
@@ -14,7 +16,10 @@ namespace Misc
 
         protected override void OnAnotherInstanceCreation()
         {
-            // ignore
+#if UNITY_EDITOR
+            Debug.Log("Destroying second singleton", gameObject);
+#endif
+            Destroy(gameObject);
         }
     }
 }
