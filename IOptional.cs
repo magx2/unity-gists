@@ -4,6 +4,17 @@ using UnityEngine;
 
 namespace Misc
 {
+    /// <summary>
+    /// Do not use this in:
+    ///     Android (IL2CPP)
+    ///     iOS(IL2CPP)
+    ///     Standalone (IL2CPP)
+    ///     Universal Windows Platform(IL2CPP)
+    ///     WebGL(IL2CPP)
+    /// , because Ahead-of-time compile (AOT) is not working
+    /// Source: https://docs.unity3d.com/Manual/ScriptingRestrictions.html
+    /// </summary>
+    /// <typeparam name="T">Type of optional</typeparam>
     public interface IOptional<T>
     {
         bool IsEmpty();
