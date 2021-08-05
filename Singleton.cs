@@ -9,15 +9,16 @@ namespace Misc
         protected virtual void Awake()
         {
             if (Instance == null)
-            {
-                Instance = (T) this;
-            }
+                Instance = (T)this;
             else
-            {
+                OnAnotherInstanceCreation();
+        }
+
+        protected virtual void OnAnotherInstanceCreation()
+        {
 #if UNITY_EDITOR
-                Debug.LogError($"Instance of [{name}] already exists!", gameObject);
+            Debug.LogError($"Instance of [{name}] already exists!", gameObject);
 #endif
-            }
         }
 
         protected void OnDestroy()
@@ -29,7 +30,6 @@ namespace Misc
 
         protected virtual void OnDestroySingleton()
         {
-            
         }
     }
 }
