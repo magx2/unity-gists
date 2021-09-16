@@ -1,10 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
+using TMPro;
 
 namespace Misc
 {
     public class FpsCounter : Singleton<FpsCounter>
     {
+        [SerializeField] private TMP_Text fpsLabel;
+        [SerializeField] private string fpsPrefix = "FPS: ";
+
         private float _deltaTime;
         private float _fps;
 
@@ -14,12 +18,19 @@ namespace Misc
         private void Update()
         {
             CountFps();
+            UpdateFps();
         }
 
         private void CountFps()
         {
             _deltaTime += (Time.unscaledDeltaTime - _deltaTime) * 0.1f;
             _fps = 1.0f / _deltaTime;
+        }
+
+        private void UpdateFps()
+        {
+            if (fpsLabel == null) return;
+            fpsLabel.text = fpsPrefix + ToStringUtil.CeilFloatToString(_fps);
         }
     }
 }
