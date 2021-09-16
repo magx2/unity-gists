@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using TMPro;
 
@@ -7,7 +8,9 @@ namespace Misc
     public class FpsCounter : Singleton<FpsCounter>
     {
         [SerializeField] private TMP_Text fpsLabel;
-        [SerializeField] private string fpsPrefix = "FPS: ";
+        [SerializeField] 
+        [ShowIf("@fpsLabel != null")]
+        private string fpsPrefix = "FPS: ";
 
         private float _deltaTime;
         private float _fps;
