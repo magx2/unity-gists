@@ -63,5 +63,10 @@ namespace Misc
 #endif
             return Random.NextDouble() >= treshold;
         }
+
+        public static bool TossACoin()
+        {
+            return OverRandomTreshold(.5f);
+        }
     }
 }
