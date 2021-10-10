@@ -63,6 +63,28 @@ namespace Misc
 #endif
             return Random.NextDouble() >= treshold;
         }
+        
+        /// <summary>
+        /// This method takes random value between [0,1)
+        /// and return true if it's smaller than given threshold.
+        /// </summary>
+        /// <param name="treshold">Threshold to check randomly generated number</param>
+        /// <returns>
+        /// true if random double is smaller than given threshold
+        /// false otherwise
+        /// </returns>
+        public static bool BelowRandomTreshold(float treshold)
+        {
+#if UNITY_EDITOR
+            if (treshold > 1)
+                Debug.LogWarning($"Treshold [{treshold}] is bigger than 1!" +
+                                 "This method will always return `true`!");
+            if (treshold < 0)
+                Debug.LogWarning($"Treshold [{treshold}] is lower than 0!" +
+                                 "This method will always return `false`!");
+#endif
+            return Random.NextDouble() < treshold;
+        }
 
         public static bool TossACoin()
         {
