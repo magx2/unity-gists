@@ -1,8 +1,10 @@
-using System.Diagnostics.CodeAnalysis;
-using UnityEditor;
 // for not UNITY_EDITOR
 // ReSharper disable once RedundantUsingDirective
+using System.Diagnostics.CodeAnalysis;
+using UnityEditor;
+#if !UNITY_EDITOR
 using UnityEngine;
+#endif
 
 namespace Misc
 {
