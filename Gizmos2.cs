@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -82,3 +83,14 @@ namespace Misc
         }
     }
 }
+#else
+using UnityEngine;
+namespace Misc
+{
+    public static class Gizmos2
+    {
+        public static void DrawWireCapsule(Vector3 p1, Vector3 p2, float radius) {}
+        public static void DrawWireCapsule(Vector3 pos, Quaternion rot, float radius, float height, Color color = default(Color)){}
+    }
+}
+#endif
