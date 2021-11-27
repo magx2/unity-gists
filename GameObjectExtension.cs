@@ -25,5 +25,17 @@ namespace Misc
 
             return children;
         }
+
+        public static void SetLayerRecursively(this GameObject gameObject, int layer)
+        {
+            gameObject.layer = layer;
+            var t = gameObject.transform;
+            for (var idx = 0; idx < t.childCount; idx++)
+            {
+                t.GetChild(idx)
+                    .gameObject
+                    .SetLayerRecursively(layer);
+            }
+        }
     }
 }
