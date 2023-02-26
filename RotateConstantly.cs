@@ -13,16 +13,14 @@ namespace Misc
         [SerializeField] private bool randomDirectionY = true;
         [SerializeField] private bool randomDirectionZ = true;
 
-        private void Awake()
-        {
+        private void Awake() {
             if (randomDirectionX) rotationSpeed.x *= Mathf.Sign(Random.Range(-1, 1));
             if (randomDirectionY) rotationSpeed.y *= Mathf.Sign(Random.Range(-1, 1));
             if (randomDirectionZ) rotationSpeed.z *= Mathf.Sign(Random.Range(-1, 1));
         }
 
-        private void FixedUpdate()
-        {
-            transform.Rotate(rotationSpeed* Time.fixedDeltaTime, space);
+        private void FixedUpdate() {
+            transform.Rotate(rotationSpeed * Time.fixedDeltaTime, space);
         }
     }
 }

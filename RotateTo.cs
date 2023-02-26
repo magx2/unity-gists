@@ -1,20 +1,16 @@
-using System;
 using UnityEngine;
 
 namespace Misc
 {
     public abstract class RotateTo : MonoBehaviour
     {
-        private void Update()
-        {
-            Rotate();
-        }
+        protected virtual void Update() => Rotate();
 
         /// <summary>
-        /// source https://forum.unity.com/threads/look-rotation-2d-equivalent.611044/
+        ///     source https://forum.unity.com/threads/look-rotation-2d-equivalent.611044/
         /// </summary>
-        private void Rotate()
-        {
+        protected void Rotate() {
+            if (!ShouldRotate()) return;
             var thisTransform = transform;
 
             var myLocation = thisTransform.position;
@@ -24,7 +20,7 @@ namespace Misc
 
             var vectorToTarget = targetLocation - myLocation;
             var rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
-            var targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
+            var targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
             transform.rotation = targetRotation;
 
 #if UNITY_EDITOR
@@ -32,13 +28,14 @@ namespace Misc
 #endif
         }
 
+        protected virtual bool ShouldRotate() => true;
+
         protected abstract Vector3 TargetLocation();
 
 #if UNITY_EDITOR
         private Vector3 _lastLocation;
-        
-        private void OnDrawGizmos()
-        {
+
+        private void OnDrawGizmos() {
             Gizmos.DrawLine(transform.position, _lastLocation);
         }
 #endif

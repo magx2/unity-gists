@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
@@ -9,10 +9,8 @@ namespace Misc
         [SerializeField] private string url;
 
         [SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Used in events")]
-        public void Open()
-        {
-            if (url == null)
-            {
+        public void Open() {
+            if (url == null) {
 #if UNITY_EDITOR
                 throw new NullReferenceException("url is null!");
 #else

@@ -1,5 +1,4 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Misc
@@ -11,8 +10,7 @@ namespace Misc
         private bool destroyOnProd = true;
 #pragma warning restore 414
 
-        private void Awake()
-        {
+        private void Awake() {
 #if UNITY_EDITOR
             Debug.Log($"Not destroying [{name}], because working in editor");
 #else

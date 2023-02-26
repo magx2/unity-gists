@@ -9,13 +9,11 @@ namespace Misc
 
         private Rigidbody _rigidbody;
 
-        private void Awake()
-        {
+        private void Awake() {
             _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void FixedUpdate()
-        {
+        private void FixedUpdate() {
             var deltaSpeed = speed * Time.fixedDeltaTime;
             var thisTransform = transform;
             _rigidbody.MovePosition(_rigidbody.position

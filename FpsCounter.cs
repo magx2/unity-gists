@@ -1,15 +1,15 @@
 using System.Diagnostics.CodeAnalysis;
 using Sirenix.OdinInspector;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 namespace Misc
 {
     public class FpsCounter : Singleton<FpsCounter>
     {
         [SerializeField] private TMP_Text fpsLabel;
-        [SerializeField] 
-        [ShowIf("@fpsLabel != null")]
+
+        [SerializeField] [ShowIf("@fpsLabel != null")]
         private string fpsPrefix = "FPS: ";
 
         private float _deltaTime;
@@ -18,20 +18,17 @@ namespace Misc
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public static float Fps => Instance._fps;
 
-        private void Update()
-        {
+        private void Update() {
             CountFps();
             UpdateFps();
         }
 
-        private void CountFps()
-        {
+        private void CountFps() {
             _deltaTime += (Time.unscaledDeltaTime - _deltaTime) * 0.1f;
             _fps = 1.0f / _deltaTime;
         }
 
-        private void UpdateFps()
-        {
+        private void UpdateFps() {
             if (fpsLabel == null) return;
             fpsLabel.text = fpsPrefix + ToStringUtil.CeilFloatToString(_fps);
         }
